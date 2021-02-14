@@ -146,3 +146,45 @@ pub fn to_black_and_white(img: GrayImage) -> GrayImage {
 
     result
 }
+
+use image::{DynamicImage, ImageBuffer};
+use wasm_bindgen::prelude::*;
+use wasm_bindgen::Clamped;
+use web_sys::{CanvasRenderingContext2d, HtmlCanvasElement, ImageData};
+
+#[wasm_bindgen]
+pub fn to_black_and_white_from_js(
+    canvas: HtmlCanvasElement,
+    ctx: CanvasRenderingContext2d,
+) {
+    let width = canvas.width();
+    let height = canvas.height();
+
+    let data: ImageData = ctx
+        .get_image_data(0.0, 0.0, width as f64, height as f64)
+        .unwrap();
+    let raw_pixels = data.data().to_vec();
+    let img_buffer = ImageBuffer::from_vec(
+        width,
+        height,
+        raw_pixels,
+    )
+    .unwrap();
+
+    let grayscale_image = DynamicImage::ImageRgba8(img_buffer).to_luma8();
+
+    let new_image = DynamicImage::ImageLuma8(to_black_and_white(grayscale_image)).to_rgba8();
+
+    let raw_pixels = new_image.into_raw();
+
+    // Convert the raw pixels back to an ImageData object.
+    let new_img_data = ImageData::new_with_u8_clamped_array_and_sh(
+        Clamped(&raw_pixels),
+        width,
+        height,
+    );
+
+    // Place the new imagedata onto the canvas
+    ctx.put_image_data(&new_img_data.unwrap(), 0.0, 0.0)
+        .expect("Should put image data on Canvas");
+}
