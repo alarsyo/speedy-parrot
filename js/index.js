@@ -2,7 +2,7 @@
 var canvas;
 var ctx;
 
-import("../pkg").then(module => {
+import("../lib/pkg").then(module => {
   var startTime;
   var endTime;
 

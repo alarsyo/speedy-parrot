@@ -1,0 +1,3 @@
+[build]
+publish = "dist/"
+command = "rustup toolchain install stable && ./build_site.sh"

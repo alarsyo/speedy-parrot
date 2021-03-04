@@ -38,7 +38,7 @@ var mainConfig = {
     }),
 
     new WasmPackPlugin({
-      crateDirectory: path.resolve(__dirname, "./"),
+      crateDirectory: path.resolve(__dirname, "./lib/"),
       // WasmPackPlugin defaults to compiling in "dev" profile. To change that, use forceMode: 'release':
       forceMode: 'release'
     }),
