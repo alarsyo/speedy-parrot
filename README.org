@@ -1,0 +1,11 @@
+#+title: Speedy Parrot
+
+Playing with WASM and Markov random fields for image processing. Specifically, a
+black and white only filter (no shades of gray).
+
+The WASM/JS glue is heavily inspired by [[https://github.com/silvia-odwyer/photon][photon-rs]]'s examples, which were a huge
+help.
+
+Live demo available here: https://speedy-parrot.alarsyo.net
+
+Processes reasonably large images in a few seconds each!
