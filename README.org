@@ -9,3 +9,8 @@ help.
 Live demo available here: https://speedy-parrot.alarsyo.net
 
 Processes reasonably large images in a few seconds each!
+
+** License
+
+This code is distributed under the terms of both the MIT license and the Apache
+License (Version 2.0).
